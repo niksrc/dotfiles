@@ -69,7 +69,7 @@ bindsym $mod+Shift+Return exec --no-startup-id exec $HOME/scripts/fullscreen_wra
 
 bindsym $mod+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -show drun -show run
 
 bindsym $mod+Left focus left
 bindsym $mod+Right focus right
@@ -321,3 +321,4 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec_always --no-startup-id xrandr  --output eDP1 --primary --mode 1920x1080 --dpi 166 --pos 0x0
 exec --no-startup-id redshift-gtk -l manual
 exec_always --no-startup-id "pgrep --exact xev || xev -root -event randr | grep --line-buffered ScreenChangeNotify | while read change; do pkill -RTMIN+4 i3blocks; done"
+exec_always amixer -c0 sset 'Headphone Mic Boost' 10dB
