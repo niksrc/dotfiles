@@ -83,6 +83,22 @@ fi
 #	sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# We do this before the following so that all the paths work.
+for file in ~/.{aliases,functions,path,exports,bash_prompt}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		if [[ -n $BASHRC_BENCH ]]; then
+			TIMEFORMAT="$file: %R"
+			# shellcheck source=/dev/null
+			time source "$file"
+			unset TIMEFORMAT
+		else
+			# shellcheck source=/dev/null
+			source "$file"
+		fi
+	fi
+done
+unset file
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -126,22 +142,6 @@ if [[ -f "$hbfile" ]]; then
 	fi
 fi
 unset hbfile
-
-# We do this before the following so that all the paths work.
-for file in ~/.{aliases,functions,path,exports,bash_prompt}; do
-	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
-		if [[ -n $BASHRC_BENCH ]]; then
-			TIMEFORMAT="$file: %R"
-			# shellcheck source=/dev/null
-			time source "$file"
-			unset TIMEFORMAT
-		else
-			# shellcheck source=/dev/null
-			source "$file"
-		fi
-	fi
-done
-unset file
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
@@ -190,4 +190,3 @@ fi
 if hash rustup 2>/dev/null; then
 	eval "$(rustup completions bash)"
 fi
-

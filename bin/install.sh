@@ -115,6 +115,15 @@ install_golang() {
 	)
 }
 
+install_node() {
+	curl https://get.volta.sh | bash -s -- --skip-setup
+	volta install node@lts
+}
+
+install_python() {
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+}
+
 # install custom scripts/binaries
 install_scripts() {
 	# install speedtest
@@ -185,6 +194,8 @@ usage() {
 	echo "  wm                                  - install window manager/desktop pkgs"
 	echo "  golang                              - install golang and packages"
 	echo "  rust                                - install rust"
+	echo "  python                              - install python (uv)"
+	echo "  node                                - install node (volta)"
 	echo "  scripts                             - install scripts"
 	echo "  tools                               - install golang, rust, and scripts"
 }
@@ -207,6 +218,10 @@ main() {
 		install_rust
 	elif [[ $cmd == "golang" ]]; then
 		install_golang "$2"
+	elif [[ $cmd == "python" ]]; then
+		install_python
+	elif [[ $cmd == "node" ]]; then
+		install_node
 	elif [[ $cmd == "scripts" ]]; then
 		install_scripts
 	elif [[ $cmd == "tools" ]]; then

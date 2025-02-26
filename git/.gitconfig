@@ -83,6 +83,9 @@
 	# Detect whitespace errors when applying a patch
 	whitespace = fix
 
+[column]
+	ui = auto
+
 [core]
 
 	# Use custom `.gitignore` and `.gitattributes`
@@ -126,6 +129,14 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+[init]
+	defaultBranch = main
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
 
 [commit]
 
@@ -136,6 +147,8 @@
 
 	# Detect copies as well as renames
 	renames = copies
+	algorithm = histogram
+	colorMoved = plain
 
 [diff "bin"]
 
@@ -145,7 +158,7 @@
 [help]
 
 	# Automatically correct and execute mistyped commands
-	autocorrect = 1
+	autocorrect = prompt
 
 [merge]
 
@@ -158,8 +171,17 @@
 	# installations. To use `simple` instead, add this to your `~/.extra` file:
 	# `git config --global push.default simple`. See http://git.io/mMah-w.
 	default = simple
+	autoSetupRemote = true
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
+
+[fetch]
+	prune = true
+	all = true
+
+[rerere]
+	enabled = true
+	autoupdate = true
 
 # URL shorthands
 

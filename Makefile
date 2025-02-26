@@ -11,19 +11,20 @@ bin: ## Installs the bin directory files.
 		sudo ln -sf $$file /usr/local/bin/$$f; \
 	done
 
-.PHONY: dotfiles 
+.PHONY: dotfiles
 dotfiles: ## Installs dotfiles.
 	stow git --target=$(HOME) --dotfiles
 	stow .config --target=$(HOME)/.config
 	stow --verbose  bash --target=$(HOME)
-	
+
 	mkdir -p $(HOME)/.local/share;
 	ln -snf $(CURDIR)/.fonts $(HOME)/.local/share/fonts;
 	fc-cache -f -v || true
+	ln -snf $(CURDIR)/.Brewfile $(HOME)/.Brewfile;
 
-.PHONY: etc 
+.PHONY: etc
 etc: ## Installs etc configs
-	sudo stow --verbose  etc --target=/etc
+	sudo stow --verbose  etc --target=/etc || true
 	systemctl --user daemon-reload || true
 	sudo systemctl daemon-reload
 	sudo systemctl enable systemd-networkd systemd-resolved
