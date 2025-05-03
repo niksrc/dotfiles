@@ -33,6 +33,7 @@ brew "tmux"
 
 # cmd tools
 brew "the_silver_searcher"
+brew "ripgrep"
 brew "bat"
 brew "neovim"
 brew "awscli"
