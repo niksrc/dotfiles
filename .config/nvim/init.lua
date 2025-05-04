@@ -92,10 +92,16 @@ require("lazy").setup({
 
         {
             "stevearc/oil.nvim",
-            opts = {},
-            keys = {
-                { "-", "<CMD>Oil<CR>", desc = "Open parent directory" }
-            }
+            config = function()
+                require("oil").setup({
+                    default_file_explorer = true,
+                    columns = {
+                        "icon",
+                        "permissions",
+                    },
+                    use_default_keymaps = true,
+                })
+            end
         },
         {
             "nvim-telescope/telescope.nvim",
