@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ~/z.sh
+
 # Create a new directory and enter it
 mkd() {
 	mkdir -p "$@"
@@ -33,4 +35,3 @@ v() {
 		vim "$@"
 	fi
 }
-
